@@ -1,0 +1,49 @@
+name: GitHub Issues to Asana Tasks
+
+# ========================================
+# トリガー設定
+# ========================================
+on:
+  issues:
+    types: [opened, closed, reopened]
+  issue_comment:
+    types: [created]
+
+jobs:
+  sync-issues-to-asana:
+    runs-on: ubuntu-latest
+    
+    # ========================================
+    # 環境セットアップ
+    # ========================================
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      # ========================================
+      # Asana連携処理（セクション管理含む）
+      # ========================================
+      - name: Sync Issue to Asana with Section Management
+        env:
+          # Asana API認証
+          ASANA_PAT: ${{ secrets.ASANA_PAT }}
+          # Asanaワークスペース設定
+          ASANA_WORKSPACE_ID: ${{ secrets.ASANA_WORKSPACE_ID }} 
+          # Asanaプロジェクト設定
+          ASANA_PROJECT_ID: ${{ secrets.ASANA_PROJECT_ID }}
+          # GitHub API認証
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Asanaセクション設定
+          ASANA_SECTION: ${{ secrets.ASANA_SECTION }}
+        run: node scripts/asana-integration.js
+        continue-on-error: true
+        
