@@ -2,7 +2,7 @@
 
 ## 📋 概要
 
-このツールは、GitHub IssuesとAsanaのタスクを自動的に同期するGitHub Actionsワークフローです。GitHub上でのIssue管理とAsanaでのプロジェクト管理を seamlessly に連携させることで、チームの生産性を向上させます。
+このツールは、GitHub IssuesとAsanaのタスクを自動的に同期するGitHub Actionsワークフローです。GitHub上でのIssue管理とAsanaでのプロジェクト管理を シームレス に連携させることで、チームの生産性を向上させます。
 
 ## ✨ 主な機能
 
